@@ -1,0 +1,46 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.lafros.gui</groupId>
+  <artifactId>version</artifactId>
+  <packaging>pom</packaging>
+  <version>1.0r1</version>
+  <name>${artifactId}</name>
+  <description>used by the maven-version-plugin, which checks that the versions specified below match those currently in use</description>
+  <dependencies>
+    <dependency>
+      <groupId>${groupId}</groupId>
+      <artifactId>parent</artifactId>
+      <version>1.0</version>
+    </dependency>
+    <dependency>
+      <groupId>${groupId}</groupId>
+      <artifactId>lafros-gui-cmds</artifactId>
+      <version>1.0r1</version>
+    </dependency>
+    <dependency>
+      <groupId>${groupId}</groupId>
+      <artifactId>lafros-gui-alerts</artifactId>
+      <version>1.0r1</version>
+    </dependency>
+    <dependency>
+      <groupId>${groupId}</groupId>
+      <artifactId>lafros-gui-app</artifactId>
+      <version>1.0r1</version>
+    </dependency>
+  </dependencies>
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>com.lafros.maven.plugins</groupId>
+        <artifactId>maven-version-plugin</artifactId>
+        <executions>
+          <execution>
+            <goals>
+              <goal>check-versions</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
+</project>

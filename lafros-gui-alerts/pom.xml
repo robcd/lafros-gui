@@ -1,0 +1,49 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <parent>
+    <groupId>com.lafros.gui</groupId>
+    <artifactId>parent</artifactId>
+    <version>1.0</version>
+  </parent>
+  <modelVersion>4.0.0</modelVersion>
+  <artifactId>${alerts.artId}</artifactId>
+  <version>${spec.vers}r${rel}</version>
+  <name>Lafros GUI-Alerts</name>
+  <description>sub-framework supporting Label specialised for interactive monitoring</description>
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.scala-tools</groupId>
+        <artifactId>maven-scala-plugin</artifactId>
+      </plugin>
+      <plugin>
+	<artifactId>maven-jar-plugin</artifactId>
+        <executions>
+          <execution>
+            <goals>
+              <goal>sign</goal>
+            </goals>
+          </execution>
+        </executions>
+	<configuration>
+	  <archive>
+            <manifestEntries>
+              <Specification-Version>${spec.vers}</Specification-Version>
+              <Implementation-Version>${rel}</Implementation-Version>
+            </manifestEntries>
+	  </archive>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+  <dependencies>
+    <dependency>
+      <groupId>${groupId}</groupId>
+      <artifactId>${cmds.artId}</artifactId>
+      <version>1.0r1</version>
+    </dependency>
+  </dependencies>
+  <properties>
+    <spec.vers>1.0</spec.vers>
+    <rel>1</rel>
+  </properties>
+</project>

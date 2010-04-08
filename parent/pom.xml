@@ -1,0 +1,112 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.lafros.gui</groupId>
+  <artifactId>parent</artifactId>
+  <packaging>pom</packaging>
+  <version>1.0</version>
+  <name>${artifactId}</name>
+  <description>contains elements inherited by each sub-project that results in a .jar file artifact</description>
+  <url>http://lafros.com/gui</url>
+  <inceptionYear>2008</inceptionYear>
+
+  <repositories>
+    <repository>
+      <id>scala-tools.org</id>
+      <name>Scala-Tools Maven2 Repository</name>
+      <url>http://scala-tools.org/repo-releases</url>
+    </repository>
+  </repositories>
+
+  <pluginRepositories>
+    <pluginRepository>
+      <id>scala-tools.org</id>
+      <name>Scala-Tools Maven2 Repository</name>
+      <url>http://scala-tools.org/repo-releases</url>
+    </pluginRepository>
+    <pluginRepository>
+      <id>lafros.com</id>
+      <name>Latterfrosken Repository</name>
+      <url>http://lafros.com/m2arts</url>
+    </pluginRepository>
+  </pluginRepositories>
+
+  <dependencies>
+    <dependency>
+      <groupId>org.scala-lang</groupId>
+      <artifactId>scala-library</artifactId>
+      <version>${scala.version}</version>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.scala-lang</groupId>
+      <artifactId>scala-swing</artifactId>
+      <version>${scala.version}</version>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>com.lafros.maven.scalatest</groupId>
+      <artifactId>lafros-maven-scalatest</artifactId>
+      <version>1.1r1</version>
+      <scope>test</scope>
+    </dependency>
+  </dependencies>
+
+  <build>
+    <sourceDirectory>src/main/scala</sourceDirectory>
+    <testSourceDirectory>src/test/scala</testSourceDirectory>
+    <pluginManagement>
+      <plugins>
+        <plugin>
+          <groupId>org.scala-tools</groupId>
+          <artifactId>maven-scala-plugin</artifactId>
+          <version>2.12</version>
+          <executions>
+            <execution>
+              <goals>
+                <goal>compile</goal>
+                <goal>testCompile</goal>
+              </goals>
+            </execution>
+          </executions>
+          <configuration>
+            <args>
+              <arg>-target:jvm-1.5</arg>
+              <arg>-unchecked</arg>
+              <arg>-deprecation</arg>
+            </args>
+          </configuration>
+        </plugin>
+        <plugin>
+          <artifactId>maven-jar-plugin</artifactId>
+          <configuration>
+            <archive>
+              <addMavenDescriptor>false</addMavenDescriptor>
+            </archive>
+            <keystore>${keystore.location}</keystore>
+            <alias>${keystore.alias}</alias>
+            <storepass>${keystore.password}</storepass>
+            <verify>true</verify>
+          </configuration>
+        </plugin>
+        <plugin>
+          <artifactId>maven-assembly-plugin</artifactId>
+          <version>2.2-beta-3</version><!--filtering of filesets fixed-->
+        </plugin>
+      </plugins>
+    </pluginManagement>
+  </build>
+  <distributionManagement>
+    <repository>
+      <id>lafros.com</id>
+      <name>Latterfrosken Repository</name>
+      <url>scp://lafros.com/www/lafros.com/m2arts</url>
+    </repository>
+  </distributionManagement>
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <scala.version>2.7.5</scala.version>
+    <alerts.artId>lafros-gui-alerts</alerts.artId>
+    <app.artId>lafros-gui-app</app.artId>
+    <cmds.artId>lafros-gui-cmds</cmds.artId>
+  </properties>
+</project>
