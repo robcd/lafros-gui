@@ -104,7 +104,7 @@
   </distributionManagement>
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <scala.version>2.7.5</scala.version>
+    <scala.version>2.7.7</scala.version>
     <alerts.artId>lafros-gui-alerts</alerts.artId>
     <app.artId>lafros-gui-app</app.artId>
     <cmds.artId>lafros-gui-cmds</cmds.artId>

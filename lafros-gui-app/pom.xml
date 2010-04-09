@@ -7,7 +7,7 @@
   <modelVersion>4.0.0</modelVersion>
   <artifactId>${app.artId}</artifactId>
   <version>${spec.vers}r${rel}</version>
-  <name>Lafros GUI-Cmds</name>
+  <name>Lafros GUI-App</name>
   <description>monitoring and control-oriented Scala-Swing application framework</description>
   <build>
     <plugins>
@@ -39,11 +39,6 @@
     <dependency>
       <groupId>${groupId}</groupId>
       <artifactId>${alerts.artId}</artifactId>
-      <version>1.0r1</version>
-    </dependency>
-    <dependency>
-      <groupId>${groupId}</groupId>
-      <artifactId>${cmds.artId}</artifactId>
       <version>1.0r1</version>
     </dependency>
   </dependencies>
