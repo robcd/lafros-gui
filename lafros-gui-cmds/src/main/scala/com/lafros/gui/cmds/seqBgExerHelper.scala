@@ -56,16 +56,16 @@ private[cmds] object seqBgExerHelper {
     }
     loop {
       react { // blocks until match received
-        case newExer: SeqBgExer => // have worker call its executeCmd in background
+        case newExer: SeqBgExer => // have worker apply its Cmd in the background
           worker.start()
         worker ! newExer.cmd
         currentExer = Some(newExer)
-        case ex: Exception => // as thrown by executeCmd
+        case ex: Exception => // as thrown by cmd()
           wrap {
             TheCmdsController.failed(ex, true)
             after(Some(ex))
           }
-        case _msg: Option[_] => // as returned by executeCmd
+        case _msg: Option[_] => // as returned by cmd()
           val msg = _msg.asInstanceOf[Option[String]]
         wrap {
           TheCmdsController.succeeded(msg, true)
@@ -73,7 +73,7 @@ private[cmds] object seqBgExerHelper {
         }
         currentExer = None
         case "reset" => if (currentExer != None) resetPending = true
-        case _ => // can a new cmd be executed?
+        case _ => // can a new Cmd be executed?
           //println("controller: sender ! "+ (currentExer == None))
           sender ! (currentExer == None)
       }
@@ -86,11 +86,9 @@ private[cmds] object seqBgExerHelper {
       case Some(true) =>
         //println("helper: controller says go ahead")
         exer.before(ev) match {
-          case Some(true) => // call execute()
-            //println("exer.before returned true (do call execute)")
+          case Some(true) => // do execute the Cmd
             controller ! exer
-          case Some(false) => // don't call execute()
-            //println("exer.before returned false (don't call execute)")
+          case Some(false) => // don't execute the Cmd
             try {
               exer.after(None)
             }
