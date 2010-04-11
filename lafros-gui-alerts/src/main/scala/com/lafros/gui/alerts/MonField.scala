@@ -95,7 +95,7 @@ class MonField extends Label("", Swing.EmptyIcon, Alignment.Center) {
     if (intrusive) addIntruder()
   }
   /**
-   * function of type, <tt>() => Alert</tt>, that will be used to
+   * function of type, <tt>Any => Alert</tt>, that will be used to
    * set the <tt>alert</tt> whenever <tt>value</tt> is set. */
   def valueToAlert = _valueToAlert
   /**
