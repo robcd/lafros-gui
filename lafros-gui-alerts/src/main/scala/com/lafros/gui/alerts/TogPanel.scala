@@ -51,7 +51,9 @@ class TogPanel extends BorderPanel {
 
   layout(alwaysVisibleContainer) = North
   reactions += {
-    case AlertChanged(monField, previousValue) => monField.alert match {
+    case AlertChanged(monField, previousValue) =>
+      //println("TogPanel reacting to AlertChanged, from "+ previousValue +" to "+ monField.alert)
+      monField.alert match {
       case NoAlert => decAlerts()
       case _ => if (previousValue == NoAlert) incAlerts()
     }
@@ -113,9 +115,8 @@ class TogPanel extends BorderPanel {
 	  //togButton.setFocusable(isFocusable())
 	  alwaysVisibleContainer.layout(togButton) = Center
 	  redraw(alwaysVisibleContainer.peer)
+          if (alertCount > 0) togButton.doClick()
         }
-      alertCount = 0
-      _proppedOpen = false
       case None =>
         _concealableComponent match {
           case Some(c) =>
