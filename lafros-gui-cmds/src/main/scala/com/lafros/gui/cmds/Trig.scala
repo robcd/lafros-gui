@@ -18,7 +18,7 @@ package com.lafros.gui.cmds
 import java.beans.{PropertyChangeEvent, PropertyChangeListener}
 import javax.swing.{AbstractButton => JAbstractButton, JToggleButton}
 import scala.collection.mutable.{Buffer, ListBuffer}
-import scala.swing.{AbstractButton, Action, event, Publisher, Reactions}
+import scala.swing.{AbstractButton, Action, event, Publisher, RadioButton, Reactions}
 import event.{ActionEvent, EditDone, Event}
 /**
  * <tt>AbstractButton</tt> mix-in, for use where triggering <tt>Cmd</tt> execution.
@@ -34,7 +34,7 @@ trait Trig extends AbstractButton {
   private val selectWhenTogSet = peer.getModel match {
     case _: DeferredSelectionModel => true // pre-installed - an action was passed to
     // the constructor
-    case _: JToggleButton.ToggleButtonModel =>
+    case _: JToggleButton.ToggleButtonModel if !isInstanceOf[RadioButton] =>
       peer.setModel(new DeferredSelectionModel); true
     case _ => false
   }
