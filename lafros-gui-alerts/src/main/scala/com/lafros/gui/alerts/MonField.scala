@@ -80,6 +80,7 @@ class MonField extends Label("", Swing.EmptyIcon, Alignment.Center) {
         super.background = MonField.backgrounds.LampOff
       case Intrusive => addIntruder()
     }
+    //println("publishing AlertChanged, from "+ previousValue +" to "+ alert)
     publish(AlertChanged(this, previousValue))
   }
   /**
