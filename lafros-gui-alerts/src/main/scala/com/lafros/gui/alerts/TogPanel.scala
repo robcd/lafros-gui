@@ -16,7 +16,7 @@
 package com.lafros.gui.alerts
 
 import Alert._
-import scala.swing.{BorderPanel, CheckBox, Component, Separator}
+import scala.swing.{BorderPanel, CheckBox, Component, Publisher, Separator}
 import scala.swing.event.ButtonClicked
 import BorderPanel.Position._
 import java.awt.BorderLayout
@@ -56,6 +56,23 @@ class TogPanel extends BorderPanel {
       monField.alert match {
       case NoAlert => decAlerts()
       case _ => if (previousValue == NoAlert) incAlerts()
+    }
+  }
+  /**
+   * looks out for <tt>MonField</tt>s with alerts. */
+  override def listenTo(ps: Publisher*) = xTo(super.listenTo(ps: _*), incAlerts, ps: _*)
+  /**
+   * looks out for <tt>MonField</tt>s with alerts. */
+  override def deafTo(ps: Publisher*) = xTo(super.deafTo(ps: _*), decAlerts, ps: _*)
+
+  private def xTo(f1: => Unit, f2: => Unit, ps: Publisher*) {
+    f1
+    for (p <- ps) p match {
+      case monField: MonField => monField.alert match {
+        case NonIntrusive | Intrusive => f2
+        case NoAlert =>
+      }
+      case _ =>
     }
   }
   /**
@@ -115,7 +132,11 @@ class TogPanel extends BorderPanel {
 	  //togButton.setFocusable(isFocusable())
 	  alwaysVisibleContainer.layout(togButton) = Center
 	  redraw(alwaysVisibleContainer.peer)
-          if (alertCount > 0) togButton.doClick()
+          if (alertCount > 0) {
+	    goingFromOrToZeroAlerts = true
+	    togButton.doClick()
+	    goingFromOrToZeroAlerts = false
+          }
         }
       case None =>
         _concealableComponent match {
