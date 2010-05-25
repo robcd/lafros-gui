@@ -147,7 +147,11 @@ class Applet extends JApplet { outer =>
       if (p.endsWith("$")) p else p +"$"
     }
     try {
-      Class.forName(name).newInstance.asInstanceOf[App]
+      val field = {
+        val c1ass = Class.forName(name)
+        c1ass.getDeclaredField("MODULE$")
+      }
+      field.get(null).asInstanceOf[App]
     }
     catch {
       case ex: ClassNotFoundException =>

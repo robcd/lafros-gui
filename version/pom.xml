@@ -3,7 +3,7 @@
   <groupId>com.lafros.gui</groupId>
   <artifactId>version</artifactId>
   <packaging>pom</packaging>
-  <version>1.0r1</version>
+  <version>1.0r2</version>
   <name>${artifactId}</name>
   <description>used by the maven-version-plugin, which checks that the versions specified below match those currently in use</description>
   <dependencies>
@@ -25,7 +25,7 @@
     <dependency>
       <groupId>${groupId}</groupId>
       <artifactId>lafros-gui-app</artifactId>
-      <version>1.0r1</version>
+      <version>1.0r2</version>
     </dependency>
   </dependencies>
   <build>

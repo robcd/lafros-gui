@@ -44,6 +44,6 @@
   </dependencies>
   <properties>
     <spec.vers>1.0</spec.vers>
-    <rel>1</rel>
+    <rel>2</rel>
   </properties>
 </project>
